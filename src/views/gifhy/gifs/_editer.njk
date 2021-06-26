@@ -1,0 +1,45 @@
+<form id="formGifs" enctype="multipart/form-data">
+  <div class="modal fade" id="formGifsModal" tabindex="-1" aria-labelledby="formGifsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: #000"  id="formGifsLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i aria-hidden="true">&times;</i>
+          </button>
+        </div>
+        <div class="modal-body">
+ 
+          
+          <div class="form-group">
+            <label style="color: #000" for="gifs-category">Categoria</label>
+            <select class="form-control" id="gifs-category" name="categoria">
+              {% for category in categorias %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+       <div class="form-group">
+            <label for="gifs-name" style="color: #000" >Nome</label>
+            <input type="text" class="form-control" id="gifs-name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label style="color: #000" >Image</label>
+            <input type="hidden" id="gifs-image-path" name="image_path">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="gifs-image-file" name="image">
+              <label class="custom-file-label" for="gifs-image-file" data-browse="Selecionar">Escolha uma imagem</label>
+            </div>
+            <img id="gifs-image-preview" class="border rounded w-100 mt-3">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-success">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

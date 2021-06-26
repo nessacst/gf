@@ -1,0 +1,127 @@
+{% extends "layout.njk" %}
+
+{% set title = "Meus Gifs" %}
+
+{% block content %}
+
+
+<h1 class="my-5 text-left">  Meus Gifs
+  <a href="cadastrar" class="btn btn-warning rounded-circle mr-4 font-weight-bold">
+    <i class="fa fa-upload" aria-hidden="true"></i> 
+  </a>
+  </h1>       
+  
+
+
+
+
+
+<hr>
+
+  {% if msg %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ msg }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endif %}
+
+
+<section class="card-deck ">
+  {% for gifsget in resultado %}
+  
+  
+          <div class="col-sm-6 col-lg-4 col-xl-3 mb-3">
+                <div class="card text-white bg-dark">
+                    <a href="gifs/{{ gifsget.id }}">  <img src="{{ gifsget.image }}" class="card-img-top" alt="{{ gifsget.name }}" height="240"> </a>
+                    <div class="card-body">
+                         <h5 class="card-title"> {{ gifsget.name }} </h5>
+                         <p> Tags: <span class="badge badge-pill badge-dark"> <a href="categorias/{{ gifsget.categoria }}/{{ gifsget.cat }}">{{ gifsget.cat }} </a> </span></p>                 
+                    <i class="fa fa-pencil-square-o btn btn-warning"   onclick="loadUpdateGifsForm({{ gifsget.id }}, '{{ gifsget.name }}', '{{ gifsget.image }}', '{{ gifsget.cat }}')"
+            data-toggle="modal"
+            data-target="#formGifsModal"
+            ></i> 
+                        
+           
+            <i
+            class="fa fa-trash-o btn btn-danger"
+            onclick="loadDeleteForm({{ gifsget.id }}, '{{ gifsget.name }}')"
+            data-toggle="modal"
+            data-target="#deleteModal">
+          </i>
+             
+                    </div>
+                </div>
+          </div>
+      
+  {% endfor %}
+</section>
+
+{% include "./gifs/_editer.njk" %}
+{% include "./gifs/_delete.njk" %}
+
+{% endblock %}
+
+{% block script %}
+
+<script type="module">
+
+  import api from '/js/services/api.js';
+ 
+
+  const form = document.querySelector('#formGifs');
+
+ //função preparação do formulario
+ function loadFormValues(title, gifsName, gifsImage, gifsCategory) {
+    const formLabel = document.querySelector('#formGifsLabel');
+    const gifsNameInput = document.querySelector('#gifs-name');
+    const gifsImagePreview = document.querySelector('#gifs-image-preview');
+    const gifsImagePath = document.querySelector('#gifs-image-path');
+    const gifsCategorySelect = document.querySelector('#gifs-category');
+
+    formLabel.innerHTML = title;
+    gifsNameInput.value = gifsName;
+    gifsImagePreview.src = gifsImage;
+    gifsImagePath.value = gifsImage;
+    
+    Array.from(gifsCategorySelect.options).forEach((option, index) => {
+      if (option.innerHTML === gifsCategory)
+        gifsCategorySelect.value = index + 1;
+    })
+  }
+
+
+ //função editar gifs
+  function loadUpdateGifsForm(...gifs) {
+    const [id, name, image, categoria] = gifs;
+    loadFormValues('Atualizar Gif', name, image, categoria);
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const gifs = new FormData(formGifs);
+      await api.updateMP(`/apigif/${id}`, gifs);
+      window.location.href = '/mygifs';
+    };
+    form['image'].required = false;
+    form['image'].onchange = () => {
+      document.querySelector('.custom-file-label').innerText = form['image'].files[0].name;
+      document.querySelector('#gifs-image-preview').src = '';
+    }
+  }
+
+
+ //função apagar gifs
+ function loadDeleteForm(gifId, Namegif) {
+    document.querySelector('#modal-name').innerHTML = Namegif;
+    document.querySelector('#deleteBtn').onclick = async (e) => {
+      e.preventDefault();
+      await api.destroy(`/apigif/${gifId}`);
+      window.location.href = '/mygifs';
+    };
+  }
+
+   window.loadUpdateGifsForm = loadUpdateGifsForm;
+   window.loadDeleteForm = loadDeleteForm;
+
+ </script>
+{% endblock %}

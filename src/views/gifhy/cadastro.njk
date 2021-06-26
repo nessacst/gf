@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+
+{% set title = "Enviar um novo Gif" %}
+
+{% block content %}
+
+  
+<h1 class="my-5 text-left"><i class="fa fa-upload" aria-hidden="true"></i>  {{ title }}</h1>
+<hr>
+  <form method="post" enctype="multipart/form-data" action="/cadastrar/action">
+  <input class="form-control" type="text" name="chave" value="{{ session.userId }}" hidden/>
+  <input class="form-control" type="text" name="autor" value="{{ session.name }}" hidden/> 
+
+   
+    <div class="form-group">
+     <label for="categoria">Categoria</label>
+            <select class="form-control" id="categoria" name="categoria">
+              {% for cat in categorias %}
+                <option value="{{ cat.id }}">{{ cat.name }}</option>
+              {% endfor %}
+            </select>
+    </div>
+
+
+    <div class="form-group">
+    <label>Nome do Gif: </label>
+    <input class="form-control" type="text" name="name"  required />
+    </div>
+   
+
+  
+
+      <div class="form-group">
+            <label>Gif, Webp, PNG:</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="gifs-image-file" name="image" required>
+              <label class="custom-file-label" for="gifs-image-file" data-browse="Selecionar">Escolha uma imagem</label>
+            </div>
+          
+      </div>
+
+    <button type="submit" class="btn btn-primary">ENVIAR AGORA</button>
+
+  </form>
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "layout.njk" %}
+
+{% set title = "Resultado de Busca" %}
+
+{% block content %}
+
+
+<h1 class="my-5 text-center">{{ title }}  para {{ paramdeBuscar }} </h1>
+<hr>
+
+<section class="card-deck">
+
+
+
+         
+          {% for gifsget in resultado %}
+            <div class="col-sm-6 col-lg-4 col-xl-3 mb-3">
+                  <div class="card text-white bg-dark">
+                      <a href="gifs/{{ gifsget.id }}">  <img src="{{ gifsget.image }}" class="card-img-top" alt="{{ gifsget.name }}"> </a>
+                      <div class="card-body">
+                            <h5 class="card-title">{{ gifsget.name }}</h5>
+                            <p class="card-text">Design: {{ gifsget.autor }} </p> <p> Tags: <span class="badge badge-pill badge-dark"> <a href="categorias/{{ gifsget.categoria }}/{{ gifsget.cat }}">{{ gifsget.cat }} </a> </span></p>
+                        </div>
+                  </div>
+            </div>
+
+          {% endfor %}
+
+
+</section>
+
+{% endblock %}
+{% block script %}
+{% endblock %}

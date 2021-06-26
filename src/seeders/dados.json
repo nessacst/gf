@@ -1,0 +1,59 @@
+{
+  "categorias": [
+  {
+    "id": 1,
+    "name": "Animais"
+  },
+  {
+    "id": 2,
+    "name": "Desenhos"
+  },
+  {
+    "id": 3,
+    "name": "Esportes"
+  }
+],
+  "gifs": [
+    {
+      "id": 1,
+      "name": "Coelho Bonito",
+      "image": "/imgs/1.gif",
+      "autor": "Gifhy",
+      "categoria": 1,
+      "chave": 1
+    },
+    {
+      "id": 2,
+      "name": "Cachorro Faminto",
+      "image": "/imgs/2.gif",
+      "autor": "Gifhy",
+      "categoria": 1,
+      "chave": 1
+    },
+    {
+      "id": 3,
+      "name": "Goleiro, Aqui não!",
+      "image": "/imgs/3.gif",
+      "autor": "Gifhy",
+      "categoria": 3,
+      "chave": 1
+    },
+    {
+      "id": 4,
+      "name": "Animação Giphy",
+      "image": "/imgs/4.gif",
+      "autor": "Gifhy",
+      "categoria": 2,
+      "chave": 1
+    }
+  ],
+
+  "users": [
+    {
+      "id": 1,
+      "name": "Gifhy",
+      "email": "gifhy@email.com",
+      "password": "admin"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{% extends "layout.njk" %}
+
+{% set title = "Entrar" %}
+
+{% block content %}
+
+
+<div class="row">
+
+   <div class="col-md-6 mx-auto">
+
+<h1 class="my-5 text-left"><img src="/imgs/gifplace.gif" height="60"/> Bem-vindo ao Gifhy</h1> 
+<span> Milhares de Gifs para você explorar, você tambem poderar enviar e compartilhar os seus gifs com a comunidade! Divirta-se </span>
+<br><br>
+
+<span>
+    {% for gifsget in resultado %}
+ <img src="{{ gifsget.image }}" height="100"  width="100"  />
+  {% endfor %}
+ </span>
+
+
+     </div>
+  <div class="col-md-6 mx-auto">
+    <h1 class="my-5 text-left"> {{ title }}</h1> 
+
+     {% if error %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ error }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endif %}
+
+
+    <form id="formUser" action="/signin" method="post">
+      <div class="form-group">
+        <label for="user-email">E-mail</label>
+        <input type="email" class="form-control" id="user-email" name="email" value="{{ login.email }}" required>
+      </div>
+      <div class="form-group">
+        <label for="user-password">Senha</label>
+        <input type="password" class="form-control" id="user-password" name="password" value="{{ login.password }}" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success float-right">Entrar</button>
+          <span> Não tem conta? <a href="/signup">Criar Agora</a> </span>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+{% endblock content %}

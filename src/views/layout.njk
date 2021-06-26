@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+  <title>{{ title }} </title>
+</head>
+<body>
+ 
+ <style>
+ body {   background-image: url("/imgs/bg.jpeg");
+ background-color: black; }
+ h1, label, span, table { color: #FFF } 
+ </style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ 
+ <div class="container">
+  <a class="navbar-brand" href="/index"> 
+  <img src="/imgs/gifhy.png" width="150" height="50" alt="">
+<a>
+   
+
+ 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if session.isAuth %}
+      <li class="nav-item ">
+        <a class="nav-link" href="/index"><i class="fa fa-home" aria-hidden="true"></i> INÍCIO</a> 
+      </li>
+      
+    
+    
+     <li class="nav-item">
+        <a class="nav-link" href="/categorias"><i class="fa fa-diamond" aria-hidden="true"></i> CATEGORIAS</a>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link btn btn-outline-warning" href="/cadastrar"><i class="fa fa-upload" aria-hidden="true"></i> ENVIAR GIFS</a>
+      </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="oi oi-person"></span> <i class="fa fa-user-circle" aria-hidden="true"></i> OLÁ {{ session.name }}</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <!--<a class="dropdown-item" href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i> PERFIL</a>-->
+              <a class="dropdown-item" href="/mygifs"><i class="fa fa-camera-retro" aria-hidden="true"></i> MEUS GIFS</a>
+              <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> SAIR</a>
+            </div>
+          </li>
+      
+
+       </ul>
+
+    <!--Form buscar-->
+  <form class="d-flex" method="get" action="/buscar">
+      <input class="form-control mr-2" name="query" type="search" placeholder="Buscar Gifhy" aria-label="Buscar Gifs">
+      <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+  </form>
+
+
+ </div></div>
+</nav>
+{% else %}
+  <li class="nav-item ">
+        <a class="nav-link" href="/signin"><i class="fa fa-sign-in" aria-hidden="true"></i> ENTRAR</a>
+      </li>
+      
+     
+     <li class="nav-item">
+        <a class="nav-link" href="/signup"><i class="fa fa-user" aria-hidden="true"></i> CRIAR CONTA</a>
+      </li>
+             {% endif %}
+
+ </ul>
+ </div></div>
+</nav>
+
+ <div class="container">
+
+    {% block content %}
+    {% endblock %}
+
+
+  <div>
+  <script src="/js/jquery.slim.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  {% block script %}
+  {% endblock %}
+</body>
+</html>

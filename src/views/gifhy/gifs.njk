@@ -1,0 +1,33 @@
+{% extends "layout.njk" %}
+
+{% set title = "Exibindo Gif" %}
+
+{% block content %}
+
+{% for gifsget in resultado %}
+<h1 class="my-5 text-center"> {{ gifsget.name }}</h1>
+<hr>
+
+ <div >
+                <div class="card text-white bg-dark">
+                   <img src="{{ gifsget.image }}" class="card-img-top" alt="{{ gifsget.name }}">
+                    <div class="card-body">
+                          <h5 class="card-title">{{ gifsget.name }}</h5>
+                          <p class="card-text">Design: {{ gifsget.autor }} </p> <p> Tags: <span class="badge badge-pill badge-dark"> <a href="categorias/{{ gifsget.categoria }}/{{ gifsget.cat }}">{{ gifsget.cat }} </a> </span></p>
+                           Link <input class="form-control mr-2" value="http://localhost:3000{{ gifsget.image }}">
+                           
+                
+
+                    </div>
+
+
+         
+
+                </div>
+          </div>
+      
+
+{% endfor %}
+ 
+
+{% endblock %}
